@@ -1,3 +1,3 @@
 module.exports = {
-    'url' : 'mongodb://localhost:27017/studying'
+    'url' : process.env.MONGO_CONNECTION_STRING
 };
