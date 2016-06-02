@@ -59,7 +59,14 @@ module.exports = function(app, passport) {
         req.logout();
         res.redirect('/');
     });
+
+    app.get('/auth/slack', passport.authenticate('slack'));
+
+    app.get('/auth/slack/callback', passport.authenticate('slack', {failureRedirect: '/login'}), function(req, res, next) {
+        res.redirect('/profile');
+    });
 };
+
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {

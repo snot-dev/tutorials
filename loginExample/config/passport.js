@@ -1,5 +1,8 @@
 // load all the things we need
 var LocalStrategy = require('passport-local').Strategy;
+var SlackStrategy = require('passport-slack').Strategy;
+
+var configAuth = require('./auth');
 
 // load up the user model
 var User  = require('../app/models/user');
@@ -30,6 +33,41 @@ module.exports = function(passport) {
     // =========================================================================
     // we are using named strategies since we have one for login and one for signup
     // by default, if there was no name, it would just be called 'local'
+
+    passport.use('slack', new SlackStrategy({
+        clientID: configAuth.slack.clientID,
+        clientSecret: configAuth.slack.clientSecret,
+        callbackURL: configAuth.slack.callbackURL,
+        scope: 'users:read'
+    },
+    function(token, refreshToken, profile, done) {
+        process.nextTick(function() {
+            User.findOne({'slack.id': profile.id}, function(err, user) {
+                if(err) {
+                    return done(err);
+                }
+
+                if(user) {
+                    return done(null, user);
+                }
+                else{
+                    var newUser = new User();
+
+                    newUser.slack.id = profile.id;
+                    newUser.slack.token = token;
+                    newUser.slack.username = profile.displayName;
+
+                    newUser.save(function(err){
+                        if(err) {
+                            throw err;
+                        }
+
+                        return done(null, newUser);
+                    });
+                }
+            });
+        });
+    }));
 
     passport.use('local-signup', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
