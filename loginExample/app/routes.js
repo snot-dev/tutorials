@@ -63,6 +63,7 @@ module.exports = function(app, passport) {
     app.get('/auth/slack', passport.authenticate('slack'));
 
     app.get('/auth/slack/callback', passport.authenticate('slack', {failureRedirect: '/login'}), function(req, res, next) {
+        // console.log(req);
         res.redirect('/profile');
     });
 };
