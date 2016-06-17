@@ -1,0 +1,18 @@
+{
+  "name": "react-and-express",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "goncalo.assuncao <goncalo.assuncao@enear.co>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/snot-dev/tutorials",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
