@@ -10,9 +10,13 @@
   "license": "ISC",
   "dependencies": {
     "browser-sync": "^2.13.0",
+    "browserify": "^13.0.1",
     "ejs": "^2.4.2",
     "express": "^4.14.0",
     "gulp": "^3.9.1",
-    "gulp-live-server": "0.0.30"
+    "gulp-live-server": "0.0.30",
+    "react": "0.13.3",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
