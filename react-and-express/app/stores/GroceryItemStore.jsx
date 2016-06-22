@@ -22,7 +22,7 @@ function GroceryItemStore () {
         items.push(item);
         triggerListeners();
 
-        helper.post("api/items", item)
+        helper.post("api/items", item);
     }
 
     function deleteGroceryItem(item) {
@@ -83,7 +83,7 @@ function GroceryItemStore () {
     return {
         getItems: getItems,
         onChange: onChange
-    }
+    };
 }
 
 module.exports = new GroceryItemStore();
